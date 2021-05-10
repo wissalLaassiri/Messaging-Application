@@ -5,20 +5,22 @@ import 'package:flutter/material.dart';
 class MessageListWidget extends StatelessWidget {
   List<Message> messages;
   ScrollController scrollController = new ScrollController();
+
   MessageListWidget(this.messages);
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if(scrollController.hasClients)
+      if (scrollController.hasClients)
         this.scrollController.jumpTo(scrollController.position.maxScrollExtent);
     });
     return ListView.separated(
-      controller: scrollController,
+        controller: scrollController,
         itemBuilder: (context, index) => MessageItemWidget(messages[index]),
         separatorBuilder: (context, index) => Divider(
-          color: Colors.white,
-          height: 3,
-        ),
+              color: Colors.white,
+              height: 3,
+            ),
         itemCount: messages.length);
   }
 }

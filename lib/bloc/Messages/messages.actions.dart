@@ -15,3 +15,10 @@ class MessagesByContactEvent extends MessageEvent<Contact>{
 class AddMessagesEvent extends MessageEvent<Message>{
   AddMessagesEvent(Message payload) : super(payload);
 }
+class SelectMessagesEvent extends MessageEvent<Message>{
+  SelectMessagesEvent(Message payload) : super(payload);
+}
+
+class DeleteSelectedMessagesEvent extends MessageEvent<Object>{
+  DeleteSelectedMessagesEvent() : super(null);
+}

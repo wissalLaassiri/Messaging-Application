@@ -22,6 +22,7 @@ class MessageFormWidget extends StatelessWidget {
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
+                  hintText: "Your Message",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
@@ -29,12 +30,12 @@ class MessageFormWidget extends StatelessWidget {
               ) ,
           ),
           IconButton(icon: Icon(Icons.send), onPressed: (){
-            Message message = Message(type: 'sent',contactID: contact.id,content: textEditingController.text);
+            Message message = Message(type: 'sent',contactID: contact.id,content: textEditingController.text,selected: false);
             context.read<MessageBloc>().add(new AddMessagesEvent(message)) ;
 
-            Message replay = Message(type: 'received',contactID: contact.id,content: 'good '+textEditingController.text);
+            Message replay = Message(type: 'received',contactID: contact.id,content: 'good '+textEditingController.text,selected: false);
             context.read<MessageBloc>().add(new AddMessagesEvent(replay)) ;
-
+            textEditingController.text="";
           })
         ],
       ),

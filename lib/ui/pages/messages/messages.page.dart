@@ -21,32 +21,52 @@ class MessagesPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('Messages of ${contact.name}'),
+          actions: [
+            BlocBuilder<MessageBloc, MessagesState>(
+                builder:(context, state) {
+                  return CircleAvatar(child:
+                  Text('${state.messages.length}'),
+                  );
+                }
+            ),
+            BlocBuilder<MessageBloc, MessagesState>(builder: (context, state) {
+              if (state.selectedMessages.length > 0) {
+                return IconButton(
+                  icon: Icon(Icons.restore_from_trash),
+                  onPressed: () {
+                    context.read<MessageBloc>().add(new DeleteSelectedMessagesEvent());
+                  },
+                );
+              } else {
+                return Container();
+              }
+            })
+          ],
         ),
         body: Column(
           children: [
-           ContactInfoWidget(contact),
+            ContactInfoWidget(contact),
             Expanded(
               child: BlocBuilder<MessageBloc, MessagesState>(
                 builder: (context, state) {
-                  if(state.requestState==RequestState.LOADING){
+                  if (state.requestState == RequestState.LOADING) {
                     return MyProgressCircularIndicator();
-                  }else if(state.requestState==RequestState.ERROR){
-                    return ErrorRetryMessage(errorMsg:
-                      state.msgErr,
-                    onAction: (){
-                      context.read<MessageBloc>().add(state.currentMsgEvent);
-                    },) ;
-                  }else if(state.requestState==RequestState.LOADED){
+                  } else if (state.requestState == RequestState.ERROR) {
+                    return ErrorRetryMessage(
+                      errorMsg: state.msgErr,
+                      onAction: () {
+                        context.read<MessageBloc>().add(state.currentMsgEvent);
+                      },
+                    );
+                  } else if (state.requestState == RequestState.LOADED) {
                     return MessageListWidget(state.messages);
-                    
-                  }else{
+                  } else {
                     return Container();
                   }
-
                 },
               ),
             ),
-           MessageFormWidget(contact),
+            MessageFormWidget(contact),
           ],
         ));
   }
