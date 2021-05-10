@@ -5,10 +5,12 @@ import 'package:contact_application/model/contact.model.dart';
 
 class ContactsRepository{
   Map<int,Contact> contacts={
-    1:Contact(id:1,name:"Otmane",profile:"Otmane",type: "Student",score:324),
-    2:Contact(id:1,name:"Wissal",profile:"Wissal",type: "Developer",score:627),
-    3:Contact(id:1,name:"Marwa",profile:"Marwa",type: "Student",score:337),
-    4:Contact(id:1,name:"Amine",profile:"Amine",type: "Developer",score:752)
+    1:Contact(id:1,name:"Otmane",profile:"Ot",type: "Student",score:324),
+    2:Contact(id:2,name:"Wissal",profile:"Wiss",type: "Developer",score:627),
+    3:Contact(id:3,name:"Marwa",profile:"Mar",type: "Student",score:337),
+    4:Contact(id:4,name:"Amine",profile:"Ami",type: "Developer",score:752),
+    5:Contact(id:5,name:"Oumnia",profile:"Oum",type: "Student",score:337),
+    6:Contact(id:6,name:"Faty",profile:"Fat",type: "Developer",score:752)
   };
 
   Future<List<Contact>> allContatcs() async {
