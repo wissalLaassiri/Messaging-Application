@@ -8,35 +8,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MessageFormWidget extends StatelessWidget {
   TextEditingController textEditingController = new TextEditingController();
   Contact contact;
+
   MessageFormWidget(this.contact);
+
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       padding: EdgeInsets.all(10),
       alignment: Alignment.bottomLeft,
       child: Row(
         children: [
           Expanded(
-              child:TextFormField(
-                controller: textEditingController,
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  hintText: "Your Message",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
+            child: TextFormField(
+              controller: textEditingController,
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                hintText: "Your Message",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
-              ) ,
+              ),
+            ),
           ),
-          IconButton(icon: Icon(Icons.send), onPressed: (){
-            Message message = Message(type: 'sent',contactID: contact.id,content: textEditingController.text,selected: false);
-            context.read<MessageBloc>().add(new AddMessagesEvent(message)) ;
+          IconButton(
+              icon: Icon(Icons.send),
+              onPressed: () {
+                Message message = Message(
+                    type: 'sent',
+                    contactID: contact.id,
+                    content: textEditingController.text,
+                    selected: false);
+                context.read<MessageBloc>().add(new AddMessagesEvent(message));
 
-            Message replay = Message(type: 'received',contactID: contact.id,content: 'good '+textEditingController.text,selected: false);
-            context.read<MessageBloc>().add(new AddMessagesEvent(replay)) ;
-            textEditingController.text="";
-          })
+                Message replay = Message(
+                    type: 'received',
+                    contactID: contact.id,
+                    content: 'good ' + textEditingController.text,
+                    selected: false);
+                context.read<MessageBloc>().add(new AddMessagesEvent(replay));
+                textEditingController.text = "";
+              })
         ],
       ),
     );

@@ -22,19 +22,19 @@ class MessagesPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Messages of ${contact.name}'),
           actions: [
-            BlocBuilder<MessageBloc, MessagesState>(
-                builder:(context, state) {
-                  return CircleAvatar(child:
-                  Text('${state.messages.length}'),
-                  );
-                }
-            ),
+            BlocBuilder<MessageBloc, MessagesState>(builder: (context, state) {
+              return CircleAvatar(
+                child: Text('${state.messages.length}'),
+              );
+            }),
             BlocBuilder<MessageBloc, MessagesState>(builder: (context, state) {
               if (state.selectedMessages.length > 0) {
                 return IconButton(
                   icon: Icon(Icons.restore_from_trash),
                   onPressed: () {
-                    context.read<MessageBloc>().add(new DeleteSelectedMessagesEvent());
+                    context
+                        .read<MessageBloc>()
+                        .add(new DeleteSelectedMessagesEvent());
                   },
                 );
               } else {

@@ -1,6 +1,7 @@
 import 'package:contact_application/bloc/Messages/messages.bloc.dart';
 import 'package:contact_application/bloc/Messages/messages.state.dart';
 import 'package:contact_application/repositories/messages.repo.dart';
+import 'package:contact_application/ui/pages/contactWithMessages/contact.message.dart';
 
 import 'bloc/contacts/contact.bloc.dart';
 import 'bloc/contacts/contact.state.dart';
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) =>MessageBloc(initialState: MessagesState.initialState(),
+            messageRepo: GetIt.instance<MessageRepo>())),
         BlocProvider(create: (context) =>
             ContactsBloc(
              initialState:ContactsState(
@@ -33,16 +36,15 @@ class MyApp extends StatelessWidget {
                 contactsRepository : GetIt.instance<ContactsRepository>(),
             ),
         ),
-        BlocProvider(create: (context) =>MessageBloc(initialState: MessagesState.initialState(),
-        messageRepo: GetIt.instance<MessageRepo>()))
       ],
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.indigo),
         routes: {
           '/contacts': (context) => ContactsPage(),
           '/messages': (context) => MessagesPage(),
+          '/contactWithMsg': (context) => ContactWithMessage(),
         },
-        initialRoute: '/contacts',
+        initialRoute: '/contactWithMsg',
       ),
     );
   }

@@ -4,37 +4,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContactsList extends StatelessWidget {
   List<Contact> contacts;
+
   ContactsList({this.contacts});
+
   @override
   Widget build(BuildContext context) {
-    return  Expanded(
+    return Expanded(
       child: ListView.separated(
-        separatorBuilder: (context,index)=>Divider(height: 5,color: Colors.blueAccent,),
+          separatorBuilder: (context, index) => Divider(
+                height: 5,
+                color: Colors.blueAccent,
+              ),
           itemCount: contacts.length,
-          itemBuilder: (context,index) {
+          itemBuilder: (context, index) {
             return ListTile(
-              onTap: (){
-                Navigator.pushNamed(context, '/messages',arguments: contacts[index]);
+              onTap: () {
+                Navigator.pushNamed(context, '/messages',
+                    arguments: contacts[index]);
               },
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(children: [
-                    CircleAvatar(child:
-                    Text('${contacts[index].profile}'),
+                    CircleAvatar(
+                      child: Text('${contacts[index].profile}'),
                       backgroundColor: Colors.indigo,
                       maxRadius: 33,
                     ),
-                    SizedBox(width: 50,),
-                    Text("${contacts[index].name}",)]),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Text(
+                      "${contacts[index].name}",
+                    )
+                  ]),
                   CircleAvatar(
                     child: Text('${contacts[index].score}'),
                   ),
                 ],
               ),
             );
-          }
-      ),
-    );;
+          }),
+    );
   }
 }

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class ContactInfoWidget extends StatelessWidget {
   Contact contact;
+
   ContactInfoWidget(this.contact);
+
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       padding: EdgeInsets.all(10),
       child: Row(
         children: [

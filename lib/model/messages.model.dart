@@ -1,3 +1,5 @@
+import 'contact.model.dart';
+
 class Message{
   int id;
   int contactID;
@@ -5,6 +7,5 @@ class Message{
   String content;
   String type;
   bool selected=false;
-
   Message({this.id, this.contactID, this.date, this.content,this.type,this.selected});
 }

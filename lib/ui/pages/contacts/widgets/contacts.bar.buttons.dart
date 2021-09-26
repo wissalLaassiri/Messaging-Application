@@ -10,10 +10,14 @@ class ContactsBarButtons extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ContactsButtonsItem(buttonLabel:'All Contacts',contactsEvent: new LoadAllContactsEvent()),
-          ContactsButtonsItem(buttonLabel:'Developers',contactsEvent: new LoadDevelopersEvent()),
-          ContactsButtonsItem(buttonLabel:'Students',contactsEvent: new LoadStudentEvent()),
-
+          ContactsButtonsItem(
+              buttonLabel: 'All Contacts',
+              contactsEvent: new LoadAllContactsEvent()),
+          ContactsButtonsItem(
+              buttonLabel: 'Developers',
+              contactsEvent: new LoadDevelopersEvent()),
+          ContactsButtonsItem(
+              buttonLabel: 'Students', contactsEvent: new LoadStudentEvent()),
         ],
       ),
     );

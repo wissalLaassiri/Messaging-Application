@@ -16,29 +16,29 @@ class ContactsPage extends StatelessWidget {
       body: Column(
         children: [
           ContactsBarButtons(),
-          BlocBuilder<ContactsBloc,ContactsState>(builder: (context,state){
+          BlocBuilder<ContactsBloc, ContactsState>(builder: (context, state) {
             if (state.requestState == RequestState.LOADING) {
               return Center(child: CircularProgressIndicator());
             } else {
               if (state.requestState == RequestState.ERROR) {
                 return ErrorRetryMessage(
                   errorMsg: state.errorMessage,
-                  onAction: (){
+                  onAction: () {
                     context.read<ContactsBloc>().add(state.currentEvent);
                   },
                 );
               }
-              if(state.requestState == RequestState.LOADED){
-                return ContactsList(contacts: state.contacts,);
-              }
-              else{
+              if (state.requestState == RequestState.LOADED) {
+                return ContactsList(
+                  contacts: state.contacts,
+                );
+              } else {
                 return Container();
               }
             }
           })
         ],
       ),
-
     );
   }
 }
